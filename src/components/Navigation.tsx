@@ -29,7 +29,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
             onClick={() => onNavigate('landing')}
             className="flex items-center gap-2 hover:opacity-80 transition-opacity"
           >
-            <img src="/pr0teens-drive-gears-logo-224x300.png" alt="Pr0teens" className="h-10 w-10" />
+            <img src="/pr0teens-drive-gears-logo-224x300.png" alt="Pr0teens" className="h-15 w-10" />
             <span className="text-xl font-bold text-yellow-500">Pr0teens</span>
           </button>
 
