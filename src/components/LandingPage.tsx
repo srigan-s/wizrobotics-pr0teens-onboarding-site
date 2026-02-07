@@ -7,7 +7,7 @@ interface LandingPageProps {
 
 export default function LandingPage({ onNavigate }: LandingPageProps) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-neutral-900 via-neutral-800 to-neutral-900">
+    <div className="min-h-screen bg-gradient-to-br from-neutral-200 via-neutral-300 to-neutral-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-16 pt-16">
           <img
@@ -18,10 +18,10 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-yellow-500 mb-6">
             Pr0teens Programming Onboarding
           </h1>
-          <p className="text-xl sm:text-2xl text-neutral-300 max-w-3xl mx-auto mb-4">
+          <p className="text-xl sm:text-2xl text-neutral-700 max-w-3xl mx-auto mb-4">
             You don't need experience to start.
           </p>
-          <p className="text-lg sm:text-xl text-neutral-400 max-w-3xl mx-auto mb-12">
+          <p className="text-lg sm:text-xl text-neutral-600 max-w-3xl mx-auto mb-12">
             This site helps you understand how our robot code actually works.
           </p>
 
@@ -75,9 +75,9 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
           />
         </div>
 
-        <div className="bg-neutral-800 rounded-2xl p-8 border-2 border-yellow-500 shadow-xl">
-          <h2 className="text-3xl font-bold text-yellow-500 mb-4">Our Philosophy</h2>
-          <div className="grid sm:grid-cols-2 gap-4 text-neutral-300">
+        <div className="bg-white rounded-2xl p-8 border-2 border-yellow-500 shadow-xl">
+          <h2 className="text-3xl font-bold text-yellow-600 mb-4">Our Philosophy</h2>
+          <div className="grid sm:grid-cols-2 gap-4 text-neutral-700">
             <div className="flex items-start">
               <div className="w-2 h-2 bg-yellow-500 rounded-full mt-2 mr-3 flex-shrink-0"></div>
               <p>Mental models before syntax</p>

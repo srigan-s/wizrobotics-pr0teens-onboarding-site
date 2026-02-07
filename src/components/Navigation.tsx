@@ -22,7 +22,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
   ];
 
   return (
-    <nav className="bg-neutral-900 text-white sticky top-0 z-50 shadow-lg">
+    <nav className="bg-neutral-200 text-neutral-900 sticky top-0 z-50 shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <button
@@ -35,7 +35,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
 
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 rounded-md hover:bg-neutral-800"
+            className="lg:hidden p-2 rounded-md hover:bg-neutral-300"
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -48,7 +48,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
                 className={`px-4 py-2 rounded-md transition-colors ${
                   currentPage === item.id
                     ? 'bg-yellow-500 text-neutral-900 font-semibold'
-                    : 'text-white hover:bg-neutral-800'
+                    : 'text-neutral-900 hover:bg-neutral-300'
                 }`}
               >
                 {item.label}
@@ -69,7 +69,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
                 className={`block w-full text-left px-4 py-3 rounded-md transition-colors ${
                   currentPage === item.id
                     ? 'bg-yellow-500 text-neutral-900 font-semibold'
-                    : 'text-white hover:bg-neutral-800'
+                    : 'text-neutral-900 hover:bg-neutral-300'
                 }`}
               >
                 {item.label}
