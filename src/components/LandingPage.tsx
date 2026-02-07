@@ -13,7 +13,7 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
           <img
             src="/pr0teens-drive-gears-logo-224x300.png"
             alt="Pr0teens Logo"
-            className="h-24 w-24 mx-auto mb-6"
+            className="h-30 w-24 mx-auto mb-6"
           />
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-yellow-500 mb-6">
             Pr0teens Programming Onboarding
