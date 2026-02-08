@@ -22,6 +22,7 @@ export default function Challenges() {
   const [userAnswers, setUserAnswers] = useState<{ [key: string]: string }>({});
   const [showResults, setShowResults] = useState(false);
   const [completedChallenges, setCompletedChallenges] = useState<string[]>([]);
+  const [transitionKey, setTransitionKey] = useState(0);
 
   const challenges: Challenge[] = [
     {
@@ -199,6 +200,7 @@ export default function Challenges() {
       setCurrentChallengeIndex(currentChallengeIndex + 1);
       setUserAnswers({});
       setShowResults(false);
+      setTransitionKey(prev => prev + 1);
     }
   };
 
@@ -207,6 +209,7 @@ export default function Challenges() {
       setCurrentChallengeIndex(currentChallengeIndex - 1);
       setUserAnswers({});
       setShowResults(false);
+      setTransitionKey(prev => prev + 1);
     }
   };
 
@@ -252,7 +255,7 @@ export default function Challenges() {
         </p>
       </div>
 
-      <div className="bg-white rounded-xl shadow-lg p-8 border-2 border-neutral-200 mb-8">
+      <div key={transitionKey} className="bg-white rounded-xl shadow-lg p-8 border-2 border-neutral-200 mb-8 animate-in fade-in duration-300">
         <div className="flex items-center justify-between mb-6">
           <div>
             <h2 className="text-3xl font-bold text-neutral-900 mb-2">{challenge.title}</h2>

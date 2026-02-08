@@ -1,4 +1,4 @@
-import { ArrowRight, Book, Code, Lightbulb, Map, Zap } from 'lucide-react';
+import { ArrowRight, Book, Code, Lightbulb, Map, Zap, Wrench } from 'lucide-react';
 import { Page } from '../App';
 
 interface LandingPageProps {
@@ -73,6 +73,12 @@ export default function LandingPage({ onNavigate }: LandingPageProps) {
             description="Test your skills with interactive coding challenges"
             onClick={() => onNavigate('challenges')}
           />
+          <FeatureCard
+            icon={<Wrench size={32} />}
+            title="Debugging"
+            description="Systematic checklist for troubleshooting robot issues"
+            onClick={() => onNavigate('debugging')}
+          />
         </div>
 
         <div className="bg-white rounded-2xl p-8 border-2 border-yellow-500 shadow-xl">
@@ -112,13 +118,13 @@ function FeatureCard({ icon, title, description, onClick }: FeatureCardProps) {
   return (
     <button
       onClick={onClick}
-      className="bg-neutral-800 p-6 rounded-xl hover:bg-neutral-750 transition-all border border-neutral-700 hover:border-yellow-500 hover:shadow-lg hover:scale-105 text-left group"
+      className="bg-white p-6 rounded-xl hover:bg-yellow-50 transition-all border-2 border-neutral-200 hover:border-yellow-500 hover:shadow-xl hover:scale-105 text-left group"
     >
-      <div className="text-yellow-500 mb-4 group-hover:scale-110 transition-transform">
+      <div className="text-yellow-600 mb-4 group-hover:scale-110 transition-transform">
         {icon}
       </div>
-      <h3 className="text-xl font-semibold text-white mb-2">{title}</h3>
-      <p className="text-neutral-400">{description}</p>
+      <h3 className="text-xl font-semibold text-neutral-900 mb-2">{title}</h3>
+      <p className="text-neutral-700">{description}</p>
     </button>
   );
 }

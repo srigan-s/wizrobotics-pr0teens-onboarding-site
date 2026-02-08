@@ -18,6 +18,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
     { id: 'opmodes' as Page, label: 'OpModes' },
     { id: 'how-it-works' as Page, label: 'How It Works' },
     { id: 'challenges' as Page, label: 'Challenges' },
+    { id: 'debugging' as Page, label: 'Debugging' },
     { id: 'mistakes' as Page, label: 'Common Mistakes' },
   ];
 

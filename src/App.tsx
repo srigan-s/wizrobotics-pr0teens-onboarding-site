@@ -6,10 +6,11 @@ import Subsystems from './components/Subsystems';
 import OpModes from './components/OpModes';
 import HowItWorks from './components/HowItWorks';
 import Challenges from './components/Challenges';
+import DebuggingChecklist from './components/DebuggingChecklist';
 import CommonMistakes from './components/CommonMistakes';
 import Navigation from './components/Navigation';
 
-export type Page = 'landing' | 'getting-started' | 'codebase' | 'subsystems' | 'opmodes' | 'how-it-works' | 'challenges' | 'mistakes';
+export type Page = 'landing' | 'getting-started' | 'codebase' | 'subsystems' | 'opmodes' | 'how-it-works' | 'challenges' | 'debugging' | 'mistakes';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>('landing');
@@ -30,6 +31,8 @@ function App() {
         return <HowItWorks />;
       case 'challenges':
         return <Challenges />;
+      case 'debugging':
+        return <DebuggingChecklist />;
       case 'mistakes':
         return <CommonMistakes />;
       default:
