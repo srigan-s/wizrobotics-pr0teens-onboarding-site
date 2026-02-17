@@ -16,6 +16,7 @@ export default function Navigation({ currentPage, onNavigate }: NavigationProps)
     { id: 'codebase' as Page, label: 'Codebase Map' },
     { id: 'subsystems' as Page, label: 'Subsystems' },
     { id: 'opmodes' as Page, label: 'OpModes' },
+    { id: 'turret' as Page, label: 'Turret' },
     { id: 'how-it-works' as Page, label: 'How It Works' },
     { id: 'challenges' as Page, label: 'Challenges' },
     { id: 'debugging' as Page, label: 'Debugging' },

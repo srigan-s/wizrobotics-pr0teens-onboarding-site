@@ -8,9 +8,10 @@ import HowItWorks from './components/HowItWorks';
 import Challenges from './components/Challenges';
 import DebuggingChecklist from './components/DebuggingChecklist';
 import CommonMistakes from './components/CommonMistakes';
+import TurretSystem from './components/TurretSystem';
 import Navigation from './components/Navigation';
 
-export type Page = 'landing' | 'getting-started' | 'codebase' | 'subsystems' | 'opmodes' | 'how-it-works' | 'challenges' | 'debugging' | 'mistakes';
+export type Page = 'landing' | 'getting-started' | 'codebase' | 'subsystems' | 'opmodes' | 'how-it-works' | 'challenges' | 'debugging' | 'mistakes' | 'turret';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>('landing');
@@ -35,6 +36,8 @@ function App() {
         return <DebuggingChecklist />;
       case 'mistakes':
         return <CommonMistakes />;
+      case 'turret':
+        return <TurretSystem />;
       default:
         return <LandingPage onNavigate={setCurrentPage} />;
     }
