@@ -11,7 +11,9 @@ export default function TurretSystem() {
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="mb-8">
-        <h1 className="text-4xl sm:text-5xl font-bold text-yellow-600 mb-4">Turret Auto-Align System</h1>
+        <h1 className="text-4xl sm:text-5xl font-bold text-yellow-600 mb-4">
+          Turret Auto-Align System
+        </h1>
         <p className="text-lg text-neutral-700 max-w-4xl">
           I designed and programmed a hooded turret auto-alignment system that automatically aims the shooter at the
           target based on the robot&apos;s position on the field.
@@ -30,14 +32,16 @@ export default function TurretSystem() {
         </div>
 
         <div className="bg-white border-2 border-neutral-200 rounded-2xl p-6 shadow-sm">
-          <h2 className="text-2xl font-bold text-neutral-900 mb-4">Turret Diagram</h2>
-          <div className="h-full min-h-64 border-2 border-dashed border-yellow-400 rounded-xl bg-yellow-50 flex flex-col items-center justify-center text-center p-6">
-            <Radar className="text-yellow-600 mb-3" size={40} />
-            <p className="text-neutral-800 font-semibold">Diagram Placeholder</p>
-            <p className="text-sm text-neutral-600 mt-2">
-              Add your turret CAD screenshot or pipeline sketch here.
-            </p>
+          <h2 className="text-2xl font-bold text-neutral-900 mb-4">Flowchart Diagram</h2>
+          <div className="h-full min-h-64 border-2 border-dashed border-yellow-400 rounded-xl bg-yellow-50 flex items-center justify-center p-4">
+            <img
+              src="public/logic.jpg"
+              alt="Turret diagram placeholder"
+              className="max-h-64 object-contain rounded-lg opacity-90"
+            />
           </div>
+          <p className="text-sm text-neutral-600 mt-3 text-center">
+          </p>
         </div>
       </div>
 
