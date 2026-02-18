@@ -1,4 +1,4 @@
-import { Crosshair, Eye, Gauge, MapPinned, Radar, RotateCcw } from 'lucide-react';
+import { Crosshair, Eye, Gauge, MapPinned, RotateCcw } from 'lucide-react';
 
 const controlLoopSnippet = `error = targetOffset;
 turretPower = kP * error + kD * derivative;
@@ -35,7 +35,7 @@ export default function TurretSystem() {
           <h2 className="text-2xl font-bold text-neutral-900 mb-4">Flowchart Diagram</h2>
           <div className="h-full min-h-64 border-2 border-dashed border-yellow-400 rounded-xl bg-yellow-50 flex items-center justify-center p-4">
             <img
-              src="public/logic.jpg"
+              src="/logic.jpg"
               alt="Turret diagram placeholder"
               className="max-h-64 object-contain rounded-lg opacity-90"
             />
@@ -65,6 +65,24 @@ export default function TurretSystem() {
         <pre className="overflow-x-auto text-sm sm:text-base text-neutral-100">
           <code>{controlLoopSnippet}</code>
         </pre>
+      </div>
+
+      <div className="bg-white border-2 border-neutral-200 rounded-2xl p-6 shadow-sm mb-8">
+        <h3 className="text-2xl font-bold text-neutral-900 mb-3">Build Walkthrough Video</h3>
+        <p className="text-neutral-700 mb-4">
+          I used this walkthrough as inspiration while building the turret system. The embedded video starts at the
+          section I referenced for the implementation.
+        </p>
+        <div className="relative w-full overflow-hidden rounded-xl border border-neutral-300" style={{ paddingTop: '56.25%' }}>
+          <iframe
+            className="absolute left-0 top-0 h-full w-full"
+            src="https://www.youtube.com/embed/55FDgyuhWTM?start=1718"
+            title="Turret system inspiration video"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
+        </div>
       </div>
 
       <div className="bg-neutral-100 border border-neutral-200 rounded-2xl p-6">
