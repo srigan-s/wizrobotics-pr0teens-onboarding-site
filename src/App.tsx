@@ -11,7 +11,7 @@ import CommonMistakes from './components/CommonMistakes';
 import TurretSystem from './components/TurretSystem';
 import Navigation from './components/Navigation';
 
-export type Page = 'landing' | 'getting-started' | 'codebase' | 'subsystems' | 'opmodes' | 'how-it-works' | 'challenges' | 'debugging' | 'mistakes' | 'turret';
+export type Page = 'landing' | 'getting-started' | 'codebase' | 'subsystems' | 'opmodes' | 'how-it-works' | 'challenges' | 'debugging' | 'mistakes' | 'mentor';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>('landing');
@@ -36,7 +36,7 @@ function App() {
         return <DebuggingChecklist />;
       case 'mistakes':
         return <CommonMistakes />;
-      case 'turret':
+      case 'mentor':
         return <TurretSystem />;
       default:
         return <LandingPage onNavigate={setCurrentPage} />;

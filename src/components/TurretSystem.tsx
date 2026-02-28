@@ -1,4 +1,5 @@
 import { Crosshair, Eye, Gauge, MapPinned, RotateCcw } from 'lucide-react';
+import { useState } from 'react';
 
 const controlLoopSnippet = `error = targetOffset;
 turretPower = kP * error + kD * derivative;
@@ -137,140 +138,186 @@ public class TurretMechanismTutorial {
     }
 }`;
 
+type MentorTab = 'turret' | 'pid-tool';
+
 export default function TurretSystem() {
+  const [activeTab, setActiveTab] = useState<MentorTab>('turret');
+
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="mb-8">
-        <h1 className="text-4xl sm:text-5xl font-bold text-yellow-600 mb-4">
-          Turret Auto-Align System
-        </h1>
+        <h1 className="text-4xl sm:text-5xl font-bold text-yellow-600 mb-4">Mentor</h1>
         <p className="text-lg text-neutral-700 max-w-4xl">
-          I designed and programmed a hooded turret auto-alignment system that automatically aims the shooter at the
-          target based on the robot&apos;s position on the field.
+          Notes and walkthroughs from mentoring projects, including the turret auto-align build and a PID tuning helper
+          script.
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-6 mb-8">
-        <div className="bg-white border-2 border-neutral-200 rounded-2xl p-6 shadow-sm">
-          <h2 className="text-2xl font-bold text-neutral-900 mb-4">System Components</h2>
-          <div className="space-y-4">
-            <SystemItem icon={<MapPinned className="text-yellow-600" />} title="Odometry localization" />
-            <SystemItem icon={<Eye className="text-yellow-600" />} title="Vision targeting (Limelight / AprilTag detection)" />
-            <SystemItem icon={<RotateCcw className="text-yellow-600" />} title="PID control" />
-            <SystemItem icon={<Gauge className="text-yellow-600" />} title="Distance-based hood angle adjustment" />
-          </div>
+      <div className="mb-8 border-b border-neutral-300">
+        <div className="flex gap-2">
+          <button
+            onClick={() => setActiveTab('turret')}
+            className={`px-4 py-2 rounded-t-lg font-semibold transition-colors ${
+              activeTab === 'turret' ? 'bg-yellow-500 text-neutral-900' : 'bg-neutral-200 text-neutral-700 hover:bg-neutral-300'
+            }`}
+          >
+            Turret
+          </button>
+          <button
+            onClick={() => setActiveTab('pid-tool')}
+            className={`px-4 py-2 rounded-t-lg font-semibold transition-colors ${
+              activeTab === 'pid-tool'
+                ? 'bg-yellow-500 text-neutral-900'
+                : 'bg-neutral-200 text-neutral-700 hover:bg-neutral-300'
+            }`}
+          >
+            PID Tool
+          </button>
         </div>
+      </div>
 
+      {activeTab === 'pid-tool' ? (
         <div className="bg-white border-2 border-neutral-200 rounded-2xl p-6 shadow-sm">
-          <h2 className="text-2xl font-bold text-neutral-900 mb-4">Flowchart Diagram</h2>
-          <div className="h-full min-h-64 border-2 border-dashed border-yellow-400 rounded-xl bg-yellow-50 flex items-center justify-center p-4">
-            <img
-              src="/logic.jpg"
-              alt="Turret diagram placeholder"
-              className="max-h-64 object-contain rounded-lg opacity-90"
-            />
-          </div>
-          <p className="text-sm text-neutral-600 mt-3 text-center">
+          <h2 className="text-2xl font-bold text-neutral-900 mb-4">PID Tool</h2>
+          <p className="text-neutral-700 leading-relaxed">
+            I made a Python script to help improve PID tuning by quickly graphing response data and comparing different
+            gain values. It made it easier to spot overshoot, slow settling, and oscillation so I could adjust kP,
+            kI, and kD faster between tests.
           </p>
         </div>
-      </div>
+      ) : (
+        <>
+          <div className="mb-8">
+            <h2 className="text-4xl sm:text-5xl font-bold text-yellow-600 mb-4">Turret Auto-Align System</h2>
+            <p className="text-lg text-neutral-700 max-w-4xl">
+              I designed and programmed a hooded turret auto-alignment system that automatically aims the shooter at
+              the target based on the robot&apos;s position on the field.
+            </p>
+          </div>
 
-      <div className="bg-white border-2 border-yellow-500 rounded-2xl p-6 shadow-sm mb-8">
-        <h2 className="text-2xl font-bold text-neutral-900 mb-5">Control Logic Overview</h2>
-        <ol className="space-y-4 text-neutral-700">
-          <LogicStep text="The robot estimates its field position using odometry." />
-          <LogicStep text="The vision system detects the target and calculates horizontal offset (tx)." />
-          <LogicStep text="A PID controller rotates the turret until the offset is zero." />
-          <LogicStep text="Distance to the target is calculated using camera angle and mounting height." />
-          <LogicStep text="The hood angle is automatically adjusted using a distance-to-angle mapping function." />
-          <LogicStep text="The system continuously updates while the robot moves." />
-        </ol>
-      </div>
+          <div className="grid lg:grid-cols-2 gap-6 mb-8">
+            <div className="bg-white border-2 border-neutral-200 rounded-2xl p-6 shadow-sm">
+              <h2 className="text-2xl font-bold text-neutral-900 mb-4">System Components</h2>
+              <div className="space-y-4">
+                <SystemItem icon={<MapPinned className="text-yellow-600" />} title="Odometry localization" />
+                <SystemItem icon={<Eye className="text-yellow-600" />} title="Vision targeting (Limelight / AprilTag detection)" />
+                <SystemItem icon={<RotateCcw className="text-yellow-600" />} title="PID control" />
+                <SystemItem icon={<Gauge className="text-yellow-600" />} title="Distance-based hood angle adjustment" />
+              </div>
+            </div>
 
-      <div className="bg-neutral-900 rounded-2xl p-6 mb-8 shadow-lg">
-        <div className="flex items-center gap-2 mb-3 text-yellow-400 font-semibold">
-          <Crosshair size={18} />
-          Example pseudo-logic
-        </div>
-        <pre className="overflow-x-auto text-sm sm:text-base text-neutral-100">
-          <code>{controlLoopSnippet}</code>
-        </pre>
-      </div>
+            <div className="bg-white border-2 border-neutral-200 rounded-2xl p-6 shadow-sm">
+              <h2 className="text-2xl font-bold text-neutral-900 mb-4">Flowchart Diagram</h2>
+              <div className="h-full min-h-64 border-2 border-dashed border-yellow-400 rounded-xl bg-yellow-50 flex items-center justify-center p-4">
+                <img
+                  src="/logic.jpg"
+                  alt="Turret diagram placeholder"
+                  className="max-h-64 object-contain rounded-lg opacity-90"
+                />
+              </div>
+              <p className="text-sm text-neutral-600 mt-3 text-center">
+              </p>
+            </div>
+          </div>
 
-      <div className="bg-white border-2 border-neutral-200 rounded-2xl p-6 shadow-sm mb-8">
-        <h3 className="text-2xl font-bold text-neutral-900 mb-3">Build Walkthrough Video</h3>
-        <p className="text-neutral-700 mb-4">
-          I used this walkthrough as inspiration while building the turret system. The embedded video starts at the
-          section I referenced for the implementation.
-        </p>
-        <div className="relative w-full overflow-hidden rounded-xl border border-neutral-300" style={{ paddingTop: '56.25%' }}>
-          <iframe
-            className="absolute left-0 top-0 h-full w-full"
-            src="https://www.youtube.com/embed/55FDgyuhWTM?start=1718"
-            title="Turret system inspiration video"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
-          />
-        </div>
-      </div>
+          <div className="bg-white border-2 border-yellow-500 rounded-2xl p-6 shadow-sm mb-8">
+            <h2 className="text-2xl font-bold text-neutral-900 mb-5">Control Logic Overview</h2>
+            <ol className="space-y-4 text-neutral-700">
+              <LogicStep text="The robot estimates its field position using odometry." />
+              <LogicStep text="The vision system detects the target and calculates horizontal offset (tx)." />
+              <LogicStep text="A PID controller rotates the turret until the offset is zero." />
+              <LogicStep text="Distance to the target is calculated using camera angle and mounting height." />
+              <LogicStep text="The hood angle is automatically adjusted using a distance-to-angle mapping function." />
+              <LogicStep text="The system continuously updates while the robot moves." />
+            </ol>
+          </div>
 
-      <div className="bg-white border-2 border-neutral-200 rounded-2xl p-6 shadow-sm mb-8">
-        <h3 className="text-2xl font-bold text-neutral-900 mb-4">Code Walkthrough: TurretMechanismTutorial.java</h3>
-        <p className="text-neutral-700 mb-5">
-          This class combines two jobs in one update loop: the turret motor turns until the Limelight&apos;s horizontal
-          error (<code>tx</code>) is near zero, and the hood servo auto-adjusts from estimated distance using vertical
-          angle (<code>ty</code>).
-        </p>
+          <div className="bg-neutral-900 rounded-2xl p-6 mb-8 shadow-lg">
+            <div className="flex items-center gap-2 mb-3 text-yellow-400 font-semibold">
+              <Crosshair size={18} />
+              Example pseudo-logic
+            </div>
+            <pre className="overflow-x-auto text-sm sm:text-base text-neutral-100">
+              <code>{controlLoopSnippet}</code>
+            </pre>
+          </div>
 
-        <div className="bg-neutral-900 rounded-xl p-4 mb-5 overflow-x-auto">
-          <pre className="text-xs sm:text-sm text-neutral-100">
-            <code>{turretMechanismTutorialCode}</code>
-          </pre>
-        </div>
+          <div className="bg-white border-2 border-neutral-200 rounded-2xl p-6 shadow-sm mb-8">
+            <h3 className="text-2xl font-bold text-neutral-900 mb-3">Build Walkthrough Video</h3>
+            <p className="text-neutral-700 mb-4">
+              I used this walkthrough as inspiration while building the turret system. The embedded video starts at the
+              section I referenced for the implementation.
+            </p>
+            <div className="relative w-full overflow-hidden rounded-xl border border-neutral-300" style={{ paddingTop: '56.25%' }}>
+              <iframe
+                className="absolute left-0 top-0 h-full w-full"
+                src="https://www.youtube.com/embed/55FDgyuhWTM?start=1718"
+                title="Turret system inspiration video"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerPolicy="strict-origin-when-cross-origin"
+                allowFullScreen
+              />
+            </div>
+          </div>
 
-        <ol className="space-y-3 text-neutral-700 list-decimal pl-5">
-          <li>
-            <span className="font-semibold">Setup:</span> <code>init()</code> grabs the turret motor and hood servo
-            from the hardware map, then puts the turret in <code>RUN_WITHOUT_ENCODER</code> so power can be applied
-            directly.
-          </li>
-          <li>
-            <span className="font-semibold">Timing:</span> each <code>update()</code> call measures elapsed time with
-            <code>ElapsedTime</code> so derivative can be scaled correctly by loop speed.
-          </li>
-          <li>
-            <span className="font-semibold">No target safety:</span> if <code>tx</code> is <code>null</code>, turret
-            power is set to zero and the method exits so the robot does not hunt blindly.
-          </li>
-          <li>
-            <span className="font-semibold">PD turret control:</span> error is <code>goalX - tx</code>, then
-            proportional and derivative terms are combined and clipped to <code>MAX_POWER</code>.
-          </li>
-          <li>
-            <span className="font-semibold">Tolerance handling:</span> if error is inside <code>angleTolerance</code>,
-            power is forced to zero so the turret settles instead of twitching around center.
-          </li>
-          <li>
-            <span className="font-semibold">Hood distance estimate:</span> when <code>ty</code> exists, distance is
-            computed from camera geometry (height difference and total vertical angle).
-          </li>
-          <li>
-            <span className="font-semibold">Servo mapping:</span> distance is mapped linearly into
-            <code>HOOD_MIN</code> to <code>HOOD_MAX</code>, clamped to safe bounds, then sent to
-            <code>hood.setPosition()</code>.
-          </li>
-        </ol>
-      </div>
+          <div className="bg-white border-2 border-neutral-200 rounded-2xl p-6 shadow-sm mb-8">
+            <h3 className="text-2xl font-bold text-neutral-900 mb-4">Code Walkthrough: TurretMechanismTutorial.java</h3>
+            <p className="text-neutral-700 mb-5">
+              This class combines two jobs in one update loop: the turret motor turns until the Limelight&apos;s horizontal
+              error (<code>tx</code>) is near zero, and the hood servo auto-adjusts from estimated distance using
+              vertical angle (<code>ty</code>).
+            </p>
 
-      <div className="bg-neutral-100 border border-neutral-200 rounded-2xl p-6">
-        <h3 className="text-xl font-bold text-neutral-900 mb-3">Reflection</h3>
-        <p className="text-neutral-700">
-          This system allowed the robot to aim consistently without driver adjustment, improving shooting accuracy and
-          reducing cycle time. It also demonstrated how control systems, localization, and computer vision can work
-          together in a robotics application.
-        </p>
-      </div>
+            <div className="bg-neutral-900 rounded-xl p-4 mb-5 overflow-x-auto">
+              <pre className="text-xs sm:text-sm text-neutral-100">
+                <code>{turretMechanismTutorialCode}</code>
+              </pre>
+            </div>
+
+            <ol className="space-y-3 text-neutral-700 list-decimal pl-5">
+              <li>
+                <span className="font-semibold">Setup:</span> <code>init()</code> grabs the turret motor and hood servo
+                from the hardware map, then puts the turret in <code>RUN_WITHOUT_ENCODER</code> so power can be applied
+                directly.
+              </li>
+              <li>
+                <span className="font-semibold">Timing:</span> each <code>update()</code> call measures elapsed time with
+                <code>ElapsedTime</code> so derivative can be scaled correctly by loop speed.
+              </li>
+              <li>
+                <span className="font-semibold">No target safety:</span> if <code>tx</code> is <code>null</code>, turret
+                power is set to zero and the method exits so the robot does not hunt blindly.
+              </li>
+              <li>
+                <span className="font-semibold">PD turret control:</span> error is <code>goalX - tx</code>, then
+                proportional and derivative terms are combined and clipped to <code>MAX_POWER</code>.
+              </li>
+              <li>
+                <span className="font-semibold">Tolerance handling:</span> if error is inside <code>angleTolerance</code>,
+                power is forced to zero so the turret settles instead of twitching around center.
+              </li>
+              <li>
+                <span className="font-semibold">Hood distance estimate:</span> when <code>ty</code> exists, distance is
+                computed from camera geometry (height difference and total vertical angle).
+              </li>
+              <li>
+                <span className="font-semibold">Servo mapping:</span> distance is mapped linearly into
+                <code>HOOD_MIN</code> to <code>HOOD_MAX</code>, clamped to safe bounds, then sent to
+                <code>hood.setPosition()</code>.
+              </li>
+            </ol>
+          </div>
+
+          <div className="bg-neutral-100 border border-neutral-200 rounded-2xl p-6">
+            <h3 className="text-xl font-bold text-neutral-900 mb-3">Reflection</h3>
+            <p className="text-neutral-700">
+              This system allowed the robot to aim consistently without driver adjustment, improving shooting accuracy
+              and reducing cycle time. It also demonstrated how control systems, localization, and computer vision can
+              work together in a robotics application.
+            </p>
+          </div>
+        </>
+      )}
     </div>
   );
 }
